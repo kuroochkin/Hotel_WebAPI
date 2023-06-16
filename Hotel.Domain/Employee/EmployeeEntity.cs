@@ -2,7 +2,7 @@
 
 namespace Hotel.Domain.Employee;
 
-public class Employee
+public class EmployeeEntity
 {
 	public Guid Id { get; set; }
 	public string LastName { get; set; }
@@ -15,14 +15,7 @@ public class Employee
 
 	public string Education { get; set; }
 
-	public Jobtitle JobTitle { get; set; }
+	public JobtitleEntity JobTitle { get; set; }
 
 	public decimal Salary { get; set; }
-
-
-
-
-
-
-
 }
