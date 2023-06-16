@@ -1,18 +1,15 @@
-﻿using Hotel.Domain.Booking;
-using Hotel.Domain.Employee;
+﻿
+using Hotel.Domain.CategoryRoom;
 
 namespace Hotel.Domain.Room;
 
 public class RoomEntity
 {
 	public Guid Id { get; set; }
-	public EmployeeEntity Employee { get; set; }
 
-	public BookingEntity Booking { get; set; }
+	public CategoryRoomEntity Category { get; set; }
 
-	public DateTime CheckIn { get; set; }
+	public RoomConditionEntity Condition { get; set; }
 
-	public DateTime Departure { get; set; }
-
-	public decimal TotalPrice { get; set; }
+	public string Thumbnail { get; set; }
 }
