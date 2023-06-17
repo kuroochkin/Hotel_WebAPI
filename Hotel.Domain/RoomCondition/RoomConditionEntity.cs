@@ -6,7 +6,7 @@ namespace Hotel.Domain.Room;
 public class RoomConditionEntity
 {
 	public Guid Id { get; set; }
-	public EmployeeEntity Employee { get; set; }
+	public EmployeeEntity? Employee { get; set; }
 
 	public BookingEntity Booking { get; set; }
 
@@ -15,4 +15,17 @@ public class RoomConditionEntity
 	public DateTime Departure { get; set; }
 
 	public decimal TotalPrice { get; set; }
+
+	public RoomConditionEntity(BookingEntity booking, decimal totalPrice)
+	{
+		Id = Guid.NewGuid();
+		CheckIn = DateTime.Now;
+		Booking = booking;
+		TotalPrice = totalPrice;
+	}
+
+	public RoomConditionEntity()
+	{
+
+	}
 }
