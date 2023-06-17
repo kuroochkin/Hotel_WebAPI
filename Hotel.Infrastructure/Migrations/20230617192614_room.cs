@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hotel.Infrastructure.Migrations
 {
-    public partial class feature1 : Migration
+    public partial class room : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -128,9 +128,9 @@ namespace Hotel.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ConditionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ConditionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -139,14 +139,12 @@ namespace Hotel.Infrastructure.Migrations
                         name: "FK_Rooms_CategoriesRooms_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "CategoriesRooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Rooms_RoomConditions_ConditionId",
                         column: x => x.ConditionId,
                         principalTable: "RoomConditions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

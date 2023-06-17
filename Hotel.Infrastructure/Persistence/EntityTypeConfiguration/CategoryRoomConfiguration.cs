@@ -14,6 +14,5 @@ public class CategoryRoomConfiguration : IEntityTypeConfiguration<CategoryRoomEn
 		builder.Property(category => category.QuantityRooms);
 		builder.Property(category => category.Description);
 		builder.Property(category => category.Price);
-
 	}
 }
