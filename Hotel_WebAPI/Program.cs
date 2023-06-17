@@ -1,9 +1,13 @@
+using Hotel.API;
+using Hotel.App;
 using Hotel.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
 	builder.Services
-		.AddInfrastructure(builder.Configuration);
+		.AddApplication()
+		.AddInfrastructure(builder.Configuration)
+		.AddPresentation();
 
 
 	builder.Services
@@ -20,11 +24,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
+	if (app.Environment.IsDevelopment())
+	{
+		app.UseSwagger();
+		app.UseSwaggerUI();
+	}
 	app.UseCors("AllowAllHeaders");
 
 	app.UseHttpsRedirection();
 
-	//app.MapControllers();
+	app.MapControllers();
 
 	app.Run();
 }
