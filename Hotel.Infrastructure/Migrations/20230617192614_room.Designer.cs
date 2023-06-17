@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230616200839_feature1")]
-    partial class feature1
+    [Migration("20230617192614_room")]
+    partial class room
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -190,14 +190,13 @@ namespace Hotel.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CategoryId")
+                    b.Property<Guid?>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ConditionId")
+                    b.Property<Guid?>("ConditionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Thumbnail")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -250,15 +249,11 @@ namespace Hotel.Infrastructure.Migrations
                 {
                     b.HasOne("Hotel.Domain.CategoryRoom.CategoryRoomEntity", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Hotel.Domain.Room.RoomConditionEntity", "Condition")
                         .WithMany()
-                        .HasForeignKey("ConditionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ConditionId");
 
                     b.Navigation("Category");
 
