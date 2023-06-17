@@ -1,4 +1,6 @@
-﻿namespace Hotel.API;
+﻿using Hotel.API.Common.Mapping;
+
+namespace Hotel.API;
 
 public static class DependencyInjection
 {
@@ -6,8 +8,9 @@ public static class DependencyInjection
 	{
 		services.AddControllers();
 		services.AddEndpointsApiExplorer();
-		//services.AddSwaggerGen();
-		
+		services.AddMappings();
+		services.AddSwaggerGen();
+
 		return services;
 	}
 }
