@@ -2,6 +2,7 @@
 using Hotel.App.Common.Errors;
 using Hotel.App.Common.Interfaces;
 using Hotel.Domain.Booking;
+using Hotel.Domain.Client;
 using Hotel.Domain.Room;
 using MediatR;
 using static Hotel.Domain.Booking.BookingEntity;
@@ -33,7 +34,15 @@ public class CreateBookingCommandHandler
 			return Errors.Room.NotFound;
 		}
 
-		var booking = new BookingEntity(BookingStatus.Free);
+		var clients = request.Clients.Select(client => new ClientEntity(
+			client.LastName,
+			client.FirstName,
+			client.Patronymic,
+			client.Birthday,
+			client.Sex)
+		).ToList();
+
+		var booking = new BookingEntity(BookingStatus.Free, clients);
 
 		var roomCondition = new RoomConditionEntity(booking, request.TotalPrice);
 
