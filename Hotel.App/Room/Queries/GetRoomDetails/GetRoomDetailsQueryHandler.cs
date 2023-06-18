@@ -3,7 +3,6 @@ using Hotel.App.Common.Errors;
 using Hotel.App.Common.Interfaces;
 using Hotel.App.Room.Vm;
 using MediatR;
-using System.Linq;
 
 namespace Hotel.App.Room.Queries.GetRoomDetails;
 
