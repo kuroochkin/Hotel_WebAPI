@@ -6,6 +6,7 @@ using MapsterMapper;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Hotel.App.Room.Queries.GetFreeRooms;
 
 namespace Hotel.API.Controllers.Room;
 
@@ -34,6 +35,20 @@ public class RoomController : ControllerBase
 			errors => Problem("Ошибка")
 		);
 	}
+
+	[HttpGet("freeRooms")]
+	public async Task<IActionResult> GetFreeRoomsr()
+	{
+		var query = new GetFreeRoomsQuery();
+
+		var roomsResult = await _mediator.Send(query);
+
+		return roomsResult.Match(
+			rooms => Ok(_mapper.Map<GetRoomsResponse>(rooms)),
+			errors => Problem("Ошибка")
+		);
+	}
+
 
 	[HttpPost("create")]
 	public async Task<IActionResult> CreateBooking(CreateBookingRequest request)
