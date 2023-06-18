@@ -2,4 +2,13 @@
 
 public record CreateBookingRequest(
 	string roomId,
-	decimal totalPrice);
+	decimal totalPrice,
+	List<GetClientsRequest> Clients);
+
+public record GetClientsRequest(
+	string? LastName,
+	string? FirstName,
+	string? Patronymic,
+	DateTime Birthday,
+	string? Education,
+	string Sex);

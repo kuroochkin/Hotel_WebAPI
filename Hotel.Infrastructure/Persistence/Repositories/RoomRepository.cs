@@ -18,6 +18,7 @@ public class RoomRepository : GenericRepository<RoomEntity>, IRoomRepository
 			.Include(room => room.Category)
 			.Include(room => room.Condition)
 			.ThenInclude(condition => condition.Booking)
+			.ThenInclude(booking => booking.Clients)
 			.FirstOrDefaultAsync(room => room.Id == id);
 	}
 

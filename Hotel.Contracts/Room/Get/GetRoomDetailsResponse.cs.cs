@@ -28,8 +28,8 @@ namespace Hotel.Contracts.Room.Get
 
 	public record BookingResponse(
 		string Id,
-		BookingStatus Status
-		//List<ClientVm> Clients
+		BookingStatus Status,
+		List<ClientResponse> Clients
 		);
 
 	public record EmployeeResponse(
