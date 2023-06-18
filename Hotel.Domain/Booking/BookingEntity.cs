@@ -35,9 +35,15 @@ public class BookingEntity
 
 	public List<ClientEntity> Clients = new();
 
-	public BookingEntity(BookingStatus status)
+	public BookingEntity(BookingStatus status, List<ClientEntity> clients)
 	{
 		Id = Guid.NewGuid();
 		Status = status;
+		Clients = clients;
+	}
+
+	public BookingEntity()
+	{
+
 	}
 }

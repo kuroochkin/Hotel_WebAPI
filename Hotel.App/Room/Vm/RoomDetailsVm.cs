@@ -6,32 +6,32 @@ namespace Hotel.App.Room.Vm;
 
 public record RoomDetailsVm(
 	string Id,
-	CategoryRoomVm Category,
-	RoomConditionVm Condition,
-	string Thumbnail);
+	CategoryRoomVm? Category,
+	RoomConditionVm? Condition,
+	string? Thumbnail);
 
 public record CategoryRoomVm(
-	string Id,
-	string Category,
-	int QuantityPersons,
-	int QuantityRooms,
-	string Description,
-	decimal Price
+	string? Id,
+	string? Category,
+	int? QuantityPersons,
+	int? QuantityRooms,
+	string? Description,
+	decimal? Price
 	);
 
 public record RoomConditionVm(
-	string Id,
+	string? Id,
 	EmployeeVm? Employee,
-	BookingVm Booking,
+	BookingVm? Booking,
 	DateTime CheckIn,
 	DateTime Departure,
 	decimal TotalPrice
 	);
 
 public record BookingVm(
-	string Id,
-	BookingStatus Status
-	//List<ClientVm> Clients
+	string? Id,
+	BookingStatus? Status,
+	List<ClientVm> Clients
 	);
 
 public record EmployeeVm(
@@ -46,17 +46,16 @@ public record EmployeeVm(
 	);
 
 public record ClientVm(
-	string? Id,
+	string Id,
 	string? LastName,
 	string? FirstName,
 	string? Patronymic,
 	DateTime? Birthday,
-	string? Education,
 	string Sex
 	);
 
 public record JobtitleVm(
-	string Id,
-	string JobTitle
+	string? Id,
+	string? JobTitle
 	);
 
