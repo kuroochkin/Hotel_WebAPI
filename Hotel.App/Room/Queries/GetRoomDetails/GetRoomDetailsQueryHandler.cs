@@ -3,6 +3,7 @@ using Hotel.App.Common.Errors;
 using Hotel.App.Common.Interfaces;
 using Hotel.App.Room.Vm;
 using MediatR;
+using System.Linq;
 
 namespace Hotel.App.Room.Queries.GetRoomDetails;
 
@@ -34,33 +35,43 @@ public class GetRoomDetailsQueryHandler
 		var roomInfo = new RoomDetailsVm(
 			room.Id.ToString(),
 			new CategoryRoomVm(
-				room.Category.Id.ToString(),
-				room.Category.Category,
-				room.Category.QuantityPersons,
-				room.Category.QuantityRooms,
-				room.Category.Description,
-				room.Category.Price
+				room?.Category?.Id.ToString(),
+				room?.Category?.Category,
+				room?.Category?.QuantityPersons,
+				room?.Category?.QuantityRooms,
+				room?.Category?.Description,
+				room?.Category?.Price
 				),
 			new RoomConditionVm(
-				room.Condition.Id.ToString(),
+				room?.Condition?.Id.ToString(),
 				new EmployeeVm(
-					room.Condition.Employee.Id.ToString(),
-					room.Condition.Employee.LastName,
-					room.Condition.Employee.FirstName,
-					room.Condition.Employee.Patronymic,
-					room.Condition.Employee.Birthday,
-					room.Condition.Employee.Education,
+					room?.Condition?.Employee?.Id.ToString(),
+					room?.Condition?.Employee?.LastName,
+					room?.Condition?.Employee?.FirstName,
+					room?.Condition?.Employee?.Patronymic,
+					room?.Condition?.Employee?.Birthday,
+					room?.Condition?.Employee?.Education,
 					new JobtitleVm(
-						room.Condition.Employee.JobTitle.Id.ToString(),
-						room.Condition.Employee.JobTitle.JobTitle),
-					room.Condition.Employee.Salary
+						room?.Condition?.Employee?.JobTitle?.Id.ToString(),
+						room?.Condition?.Employee?.JobTitle?.JobTitle),
+					room?.Condition?.Employee?.Salary
 					),
 				new BookingVm(
-					room.Condition.Booking.Id.ToString(),
-					room.Condition.Booking.GetStatus),
-				room.Condition.CheckIn,
-				room.Condition.Departure,
-				room.Condition.TotalPrice),
+					room?.Condition?.Booking?.Id.ToString(),
+					room?.Condition?.Booking?.GetStatus,
+					new List<ClientVm>(room.Condition.Booking.Clients.Select(client => new ClientVm(
+						client.Id.ToString(),
+						client.LastName,
+						client.FirstName,
+						client.Patronymic,
+						client.Birthday,
+						client.Sex)
+						)
+						)		
+					),
+					room.Condition.CheckIn,
+					room.Condition.Departure,
+					room.Condition.TotalPrice),
 			room.Thumbnail
 			);
 
