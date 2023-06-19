@@ -4,6 +4,9 @@ using static Hotel.Domain.Booking.BookingEntity;
 
 namespace Hotel.App.Room.Vm;
 
+public record RoomsVm(
+	List<RoomDetailsVm> Rooms);
+
 public record RoomDetailsVm(
 	string Id,
 	CategoryRoomVm? Category,

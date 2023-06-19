@@ -4,34 +4,29 @@ using Hotel.App.Common.Interfaces;
 using Hotel.App.Room.Vm;
 using MediatR;
 
-namespace Hotel.App.Room.Queries.GetRoomDetails;
+namespace Hotel.App.Room.Queries.GetFreeRooms;
 
-public class GetRoomDetailsQueryHandler
-	: IRequestHandler<GetRoomDetailsQuery, ErrorOr<RoomDetailsVm>>
+public class GetFreeRoomsQueryHandler
+	: IRequestHandler<GetFreeRoomsQuery, ErrorOr<RoomsVm>>
 {
 	private readonly IUnitOfWork _unitOfWork;
 
-	public GetRoomDetailsQueryHandler(IUnitOfWork unitOfWork)
+	public GetFreeRoomsQueryHandler(IUnitOfWork unitOfWork)
 	{
 		_unitOfWork = unitOfWork;
 	}
 
-	public async Task<ErrorOr<RoomDetailsVm>> Handle(
-		GetRoomDetailsQuery request, 
+	public async Task<ErrorOr<RoomsVm>> Handle(
+		GetFreeRoomsQuery request, 
 		CancellationToken cancellationToken)
 	{
-		if (!Guid.TryParse(request.RoomId, out var roomId))
-		{
-			return Errors.Room.InvalidId;
-		}
-
-		var room = await _unitOfWork.Rooms.FindRoomWithConditionAndCategory(roomId);
-		if(room is null)
+		var rooms = await _unitOfWork.Rooms.FindFreeRooms();
+		if(rooms is null)
 		{
 			return Errors.Room.NotFound;
 		}
 
-		var roomInfo = new RoomDetailsVm(
+		var roomsModel = rooms.Select(room => new RoomDetailsVm(
 			room.Id.ToString(),
 			new CategoryRoomVm(
 				room?.Category?.Id.ToString(),
@@ -66,14 +61,16 @@ public class GetRoomDetailsQueryHandler
 						client.Birthday,
 						client.Sex)
 						)
-						)		
+						)
 					),
 					room.Condition.CheckIn,
 					room.Condition.Departure,
 					room.Condition.TotalPrice),
-			room.Thumbnail
-			);
+			room.Thumbnail))
+		.ToList();
 
-		return roomInfo;
+		var result = new RoomsVm(roomsModel);
+
+		return result;
 	}
 }

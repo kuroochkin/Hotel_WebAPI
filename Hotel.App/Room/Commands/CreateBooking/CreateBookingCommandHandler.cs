@@ -42,7 +42,7 @@ public class CreateBookingCommandHandler
 			client.Sex)
 		).ToList();
 
-		var booking = new BookingEntity(BookingStatus.Free, clients);
+		var booking = new BookingEntity(BookingStatus.Booked, clients);
 
 		var roomCondition = new RoomConditionEntity(booking, request.TotalPrice);
 
