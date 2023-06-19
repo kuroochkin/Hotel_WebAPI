@@ -13,7 +13,17 @@ public class RoomRepository : GenericRepository<RoomEntity>, IRoomRepository
 	{
 	}
 
-	public async Task<RoomEntity?> FindRoomWithConditionAndCategory(Guid id)
+	public async Task<List<RoomEntity>?> FindAllRooms()
+	{
+		return await _context.Rooms
+			.Include(room => room.Category)
+			.Include(room => room.Condition)
+			.ThenInclude(condition => condition.Booking)
+			.ThenInclude(booking => booking.Clients)
+			.ToListAsync();
+    }
+
+    public async Task<RoomEntity?> FindRoomWithConditionAndCategory(Guid id)
 	{
 		return await _context.Rooms
 			.Include(room => room.Category)
