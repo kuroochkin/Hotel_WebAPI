@@ -18,4 +18,28 @@ public class EmployeeEntity
 	public JobtitleEntity JobTitle { get; set; }
 
 	public decimal Salary { get; set; }
+
+	public EmployeeEntity(
+		string lastName, 
+		string firstName, 
+		string patronymic, 
+		DateTime birthday, 
+		string education, 
+		JobtitleEntity jobTitle, 
+		decimal salary)
+	{
+		Id = Guid.NewGuid();
+		LastName = lastName;
+		FirstName = firstName;
+		Patronymic = patronymic;
+		Birthday = birthday;
+		Education = education;
+		JobTitle = jobTitle;
+		Salary = salary;
+	}
+
+	public EmployeeEntity()
+	{
+
+	}
 }
