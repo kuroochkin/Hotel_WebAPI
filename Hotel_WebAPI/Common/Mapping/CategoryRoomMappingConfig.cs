@@ -1,5 +1,5 @@
 ﻿using Hotel.App.Room.Vm;
-using Hotel.Contracts.Room.Get;
+using Hotel.Contracts.CategoryRoom.Get;
 using Mapster;
 
 namespace Hotel.API.Common.Mapping;

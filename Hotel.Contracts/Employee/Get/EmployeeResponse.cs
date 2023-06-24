@@ -1,4 +1,5 @@
-﻿using Hotel.Contracts.Room.Get;
+﻿using Hotel.Contracts.Jobtitle.Get;
+using Hotel.Contracts.Room.Get;
 
 namespace Hotel.Contracts.Employee.Get;
 

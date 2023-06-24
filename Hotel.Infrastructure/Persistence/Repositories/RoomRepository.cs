@@ -43,4 +43,24 @@ public class RoomRepository : GenericRepository<RoomEntity>, IRoomRepository
 			.ToListAsync();
 	}
 
+	public async Task<List<RoomEntity>?> FindRoomsByCountSuite(int quantitySuite)
+	{
+		return await _context.Rooms
+			.Include(room => room.Category)
+			.Include(room => room.Condition)
+			.ThenInclude(condition => condition.Booking)
+			.Where(room => room.Category.QuantityRooms == quantitySuite)
+			.ToListAsync();
+	}
+
+	public async Task<List<RoomEntity>?> FindRoomsByCountPersons(int quantityPersons)
+	{
+		return await _context.Rooms
+			.Include(room => room.Category)
+			.Include(room => room.Condition)
+			.ThenInclude(condition => condition.Booking)
+			.Where(room => room.Category.QuantityPersons == quantityPersons)
+			.ToListAsync();
+	}
+
 }
