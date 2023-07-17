@@ -1,4 +1,5 @@
-﻿using ErrorOr;
+﻿using AutoMapper;
+using ErrorOr;
 using Hotel.App.Common.Errors;
 using Hotel.App.Common.Interfaces;
 using Hotel.App.Room.Vm;
@@ -10,9 +11,12 @@ public class GetEmployeeDetailsQueryHandler
     : IRequestHandler<GetEmployeeDetailsQuery, ErrorOr<EmployeeVm>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    public GetEmployeeDetailsQueryHandler(IUnitOfWork unitOfWork)
+    private readonly IMapper _mapper;
+
+    public GetEmployeeDetailsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
     public async Task<ErrorOr<EmployeeVm>> Handle(
@@ -30,20 +34,8 @@ public class GetEmployeeDetailsQueryHandler
             return Errors.Employee.NotFound;
         }
 
-        var employeeModel = new EmployeeVm(
-            employee.Id.ToString(),
-            employee.LastName,
-            employee.FirstName,
-            employee.Patronymic,
-            employee.Birthday,
-            employee.Education,
-            new JobtitleVm(
-                employee.JobTitle.Id.ToString(),
-                employee.JobTitle.JobTitle),
-            employee.Salary
-            );
-
-        return employeeModel;
+        var result = _mapper.Map<EmployeeVm>(employee);
+        return result;
     }
 }
 
