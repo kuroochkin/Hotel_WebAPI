@@ -1,5 +1,7 @@
 using Hotel.API;
 using Hotel.App;
+using Hotel.App.Common.Interfaces;
+using Hotel.App.Common.Mappings;
 using Hotel.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,12 @@ var builder = WebApplication.CreateBuilder(args);
 					   .AllowAnyHeader()
 					   .AllowAnyMethod();
 			});
+		});
+
+	builder.Services
+		.AddAutoMapper(config =>
+		{
+			config.AddProfile(new AssemblyMappingProfile(typeof(IUnitOfWork).Assembly));
 		});
 }
 

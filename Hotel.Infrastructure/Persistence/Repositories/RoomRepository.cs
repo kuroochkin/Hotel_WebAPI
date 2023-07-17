@@ -4,11 +4,14 @@ using Hotel.Infrastructure.Persistence;
 using Hotel.Domain.Room;
 using Microsoft.EntityFrameworkCore;
 using static Hotel.Domain.Booking.BookingEntity;
+using AutoMapper.QueryableExtensions;
+using Hotel.App.Room.Vm;
+using AutoMapper;
 
 namespace Hotel.Infrastructure.Repositories;
 
 public class RoomRepository : GenericRepository<RoomEntity>, IRoomRepository
-{
+{ 
 	public RoomRepository(ApplicationDbContext context) : base(context)
 	{
 	}
