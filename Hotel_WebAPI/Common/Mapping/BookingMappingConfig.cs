@@ -1,5 +1,6 @@
 ﻿using Hotel.App.Room.Commands.CreateBooking;
 using Hotel.App.Room.Vm;
+using Hotel.Contracts.Booking.Get;
 using Hotel.Contracts.Room.Get;
 using Hotel.Contracts.Room.Requests;
 using Mapster;
