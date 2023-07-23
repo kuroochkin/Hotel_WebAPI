@@ -14,5 +14,13 @@ public class CategoryRoomConfiguration : IEntityTypeConfiguration<CategoryRoomEn
 		builder.Property(category => category.QuantityRooms);
 		builder.Property(category => category.Description);
 		builder.Property(category => category.Price);
+		builder.Property(category => category.Bathroom);
+		builder.Property(category => category.AirConditioner);
+		builder.Property(category => category.Fridge);
+		builder.Property(category => category.HairDryer);
+		builder.Property(category => category.Iron);
+		builder.Property(category => category.Kettle);
+		builder.Property(category => category.Tv);
+		builder.Property(category => category.WiFi);
 	}
 }
