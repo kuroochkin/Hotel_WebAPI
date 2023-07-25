@@ -4,6 +4,7 @@ using Hotel.App.Common.Errors;
 using Hotel.App.Common.Interfaces;
 using Hotel.App.Room.Vm;
 using MediatR;
+using System.Diagnostics;
 
 namespace Hotel.App.Room.Queries.GetAllRooms;
 public class GetAllRoomsQueryHandler
@@ -23,8 +24,12 @@ public class GetAllRoomsQueryHandler
         GetAllRoomsQuery request, 
         CancellationToken cancellationToken)
     {
-        var rooms = await _unitOfWork.Rooms.FindAllRooms();
-        if(rooms is null)
+		Stopwatch stopwatch = new Stopwatch();
+		stopwatch.Start();
+		var rooms = await _unitOfWork.Rooms.FindAllRooms();
+        stopwatch.Stop();
+		Console.WriteLine(stopwatch.ElapsedMilliseconds);
+		if (rooms is null)
         {
             return Errors.Room.NotFound;
         }
