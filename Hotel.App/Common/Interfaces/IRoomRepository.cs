@@ -6,7 +6,7 @@ public interface IRoomRepository : IGenericRepository<RoomEntity>
 {
     Task<List<RoomEntity>?> FindAllRooms();
 
-    Task<RoomEntity?> FindRoomWithConditionAndCategory(Guid id);
+    Task<RoomEntity?> FindRoomWithConditionAndCategory(Guid id, CancellationToken cancellationToken = default);
 
 	Task<List<RoomEntity>?> FindFreeRooms();
 
