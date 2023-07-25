@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using System.Linq.Expressions;
 
 namespace Hotel.Infrastructure.Persistence.Specifications;
 
@@ -14,10 +15,13 @@ public abstract class Specification<TEntity>
 	{
 	}
 
-	public Expression<Func<TEntity, bool>>? Criteria { get; } 
+	public Expression<Func<TEntity, bool>>? Criteria { get; }
 
-	public List<Expression<Func<TEntity, object>>> IncludeExpressions { get; } = new();
+	public List<Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>> IncludesExpressions { get; } = new();
 
-	protected void AddInclude(Expression<Func<TEntity, object>> includeExpression) =>
-		IncludeExpressions.Add(includeExpression);
+	protected virtual void AddInclude(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includeExpression)
+	{
+		IncludesExpressions.Add(includeExpression);
+	}
+
 }

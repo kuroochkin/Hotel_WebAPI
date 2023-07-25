@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Hotel.Infrastructure.Persistence.Specifications;
 
@@ -16,11 +17,11 @@ public static class SpecificationEvaluator
 			queryable = queryable.Where(specification.Criteria);
 		}
 
-		specification.IncludeExpressions.Aggregate(
+		var query = specification.IncludesExpressions.Aggregate(
 			queryable,
 			(current, IncludeExpression) =>
-				current.Include(IncludeExpression));
+				IncludeExpression(current));
 
-		return queryable;
+		return query;
 	}
 }
