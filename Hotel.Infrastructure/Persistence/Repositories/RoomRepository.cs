@@ -6,9 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using static Hotel.Domain.Booking.BookingEntity;
 using Hotel.Infrastructure.Persistence.Specifications;
 using Hotel.Infrastructure.Persistence.Specifications.Room;
-using Hotel.Infrastructure.Migrations;
-using System.Diagnostics;
-using System.Linq.Expressions;
 
 namespace Hotel.Infrastructure.Repositories;
 
@@ -28,16 +25,8 @@ public class RoomRepository : GenericRepository<RoomEntity>, IRoomRepository
 
 	public async Task<List<RoomEntity>?> FindAllRooms()
 	{
-		//return await _context.Rooms
-		//	.Include(room => room.Category)
-		//	.Include(room => room.Condition)
-		//	.ThenInclude(condition => condition.Booking)
-		//	.ThenInclude(booking => booking.Clients)
-		//	.ToListAsync();
-
-		return await _context.Rooms
-			//ApplySpecification(new ConditionCategoryBookingClientsSpecification())
-			.Include(room => room.Condition.Booking.Clients)
+		return await 
+			ApplySpecification(new ConditionCategoryBookingClientsSpecification())
 			.ToListAsync();
 	}
 
