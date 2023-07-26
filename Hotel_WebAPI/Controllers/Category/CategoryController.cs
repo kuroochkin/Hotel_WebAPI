@@ -1,5 +1,7 @@
-﻿using Hotel.App.CategoryRoom.Commands.CreateCategory;
+﻿using Hotel.App.CategoryRoom.Commands.AddConvenience;
+using Hotel.App.CategoryRoom.Commands.CreateCategory;
 using Hotel.Contracts.CategoryRoom.Requests;
+using Hotel.Contracts.Convenience.Requests;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +25,19 @@ public class CategoryController : ControllerBase
 	public async Task<IActionResult> CreateCategory(CreateCategoryRequest request)
 	{
 		var command = _mapper.Map<CreateCategoryCommand>(request);
+
+		var result = await _mediator.Send(command);
+
+		return result.Match(
+			categoryResult => Ok(result.Value),
+			errors => Problem("Ошибка")
+			);
+	}
+
+	[HttpPost("addConvenience")]
+	public async Task<IActionResult> AddConvenience(AddConvenienceRequest request)
+	{
+		var command = _mapper.Map<AddConvenienceCommand>(request);
 
 		var result = await _mediator.Send(command);
 
