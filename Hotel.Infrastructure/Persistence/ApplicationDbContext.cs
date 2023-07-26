@@ -4,6 +4,7 @@ using Hotel.Domain.Client;
 using Hotel.Domain.Employee;
 using Hotel.Domain.JobTitle;
 using Hotel.Domain.Room;
+using Hotel.Domain.Сonveniences;
 using Hotel.Infrastructure.Persistence.EntityTypeConfiguration;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<JobtitleEntity> Jobtitles { get; set; }
 	public DbSet<RoomEntity> Rooms { get; set; }
 	public DbSet<RoomConditionEntity> RoomConditions { get; set; }
+	public DbSet<СonvenienceEntity> Conveniences { get; set; }
 
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 	   : base(options) { }
@@ -31,6 +33,7 @@ public class ApplicationDbContext : DbContext
 		builder.ApplyConfiguration(new JobtitleConfiguration());
 		builder.ApplyConfiguration(new RoomConfiguration());
 		builder.ApplyConfiguration(new RoomConditionConfiguration());
+		builder.ApplyConfiguration(new СonvenienceConfiguration());
 
 		base.OnModelCreating(builder);
 	}
