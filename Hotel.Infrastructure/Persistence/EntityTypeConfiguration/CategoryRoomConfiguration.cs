@@ -9,10 +9,13 @@ public class CategoryRoomConfiguration : IEntityTypeConfiguration<CategoryRoomEn
 	public void Configure(EntityTypeBuilder<CategoryRoomEntity> builder)
 	{
 		builder.HasKey(category => category.Id);
+		builder.HasOne(category => category.Convenience);
 		builder.Property(category => category.Category);
 		builder.Property(category => category.QuantityPersons);
 		builder.Property(category => category.QuantityRooms);
 		builder.Property(category => category.Description);
 		builder.Property(category => category.Price);
+
+
 	}
 }

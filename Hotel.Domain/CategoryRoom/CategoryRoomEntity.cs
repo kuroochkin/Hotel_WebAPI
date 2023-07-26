@@ -15,5 +15,20 @@ public class CategoryRoomEntity
 
 	public decimal Price { get; set; }
 
-	public СonvenienceEntity Convenience { get; set; }
+	public СonvenienceEntity? Convenience { get; set; }
+
+	public CategoryRoomEntity(
+		string category, 
+		string description, 
+		int quantityPersons, 
+		int quantityRooms, 
+		decimal price)
+	{
+		Id = Guid.NewGuid();
+		Category = category;
+		Description = description;
+		QuantityPersons = quantityPersons;
+		QuantityRooms = quantityRooms;
+		Price = price;
+	}
 }
