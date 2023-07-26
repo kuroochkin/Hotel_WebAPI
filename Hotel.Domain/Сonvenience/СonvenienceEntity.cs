@@ -21,7 +21,7 @@ public class СonvenienceEntity
 	public bool WiFi { get; set; }
 
 
-	public СonvenienceEntity(Guid id,
+	public СonvenienceEntity(
 		bool bathroom,
 		bool tv,
 		bool airConditioner,
@@ -31,7 +31,7 @@ public class СonvenienceEntity
 		bool iron,
 		bool wiFi)
 	{
-		Id = id;
+		Id = Guid.NewGuid();
 		Bathroom = bathroom;
 		Tv = tv;
 		AirConditioner = airConditioner;

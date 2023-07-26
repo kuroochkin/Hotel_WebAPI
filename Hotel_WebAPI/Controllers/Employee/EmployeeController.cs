@@ -23,7 +23,7 @@ public class EmployeeController : ControllerBase
 	}
 
 	[HttpGet("{employeeId}")]
-	public async Task<IActionResult> GetDetailsOrder(string employeeId)
+	public async Task<IActionResult> GetDetailsEmployee(string employeeId)
 	{
 		var query = new GetEmployeeDetailsQuery(employeeId);
 
