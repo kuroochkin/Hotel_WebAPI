@@ -1,5 +1,4 @@
 ﻿using Hotel.App.Common.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Hotel.Infrastructure.Persistence.Repositories;
 
@@ -14,7 +13,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		IEmployeeRepository employees,
 		IJobtitleRepository jobtitles,
 		IRoomConditionRepository roomCondition,
-		IRoomRepository rooms)
+		IRoomRepository rooms,
+		IConvenienceRepository conveniences)
 	{
 		_context = context;
 		Bookings = bookings;
@@ -24,6 +24,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 		Jobtitles = jobtitles;
 		RoomConditions = roomCondition;
 		Rooms = rooms;
+		Conveniences = conveniences;
 	}
 	public IBookingRepository Bookings { get; }
 
@@ -38,6 +39,8 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 	public IRoomConditionRepository RoomConditions { get; }
 
 	public IRoomRepository Rooms { get; }
+
+	public IConvenienceRepository Conveniences { get; }
 
 	public async Task<bool> CompleteAsync()
 	{

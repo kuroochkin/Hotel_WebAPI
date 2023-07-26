@@ -9,5 +9,6 @@ public interface IUnitOfWork
 	IJobtitleRepository Jobtitles { get; }
 	IRoomConditionRepository RoomConditions { get; }
 	IRoomRepository Rooms { get; }
+	IConvenienceRepository Conveniences { get; }
 	Task<bool> CompleteAsync();
 }
