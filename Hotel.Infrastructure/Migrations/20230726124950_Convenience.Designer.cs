@@ -4,6 +4,7 @@ using Hotel.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230726124950_Convenience")]
+    partial class Convenience
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +83,7 @@ namespace Hotel.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ConvenienceId")
+                    b.Property<Guid>("ConvenienceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -250,7 +252,9 @@ namespace Hotel.Infrastructure.Migrations
                 {
                     b.HasOne("Hotel.Domain.Сonveniences.СonvenienceEntity", "Convenience")
                         .WithMany()
-                        .HasForeignKey("ConvenienceId");
+                        .HasForeignKey("ConvenienceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Convenience");
                 });

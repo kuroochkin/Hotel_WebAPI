@@ -1,7 +1,5 @@
-﻿using Hotel.App.Room.Commands.CreateBooking;
-using Hotel.App.Room.Queries.GetRoomDetails;
+﻿using Hotel.App.Room.Queries.GetRoomDetails;
 using Hotel.Contracts.Room.Get;
-using Hotel.Contracts.Room.Requests;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

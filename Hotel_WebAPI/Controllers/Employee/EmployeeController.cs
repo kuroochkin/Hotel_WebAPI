@@ -1,10 +1,7 @@
 ﻿using Hotel.App.Employee.Commands.CreateEmployee;
 using Hotel.App.Employee.Queries.GetEmployeeDetails;
-using Hotel.App.Room.Commands.CreateBooking;
 using Hotel.Contracts.Employee.Get;
 using Hotel.Contracts.Employee.Requests;
-using Hotel.Contracts.Room.Get;
-using Hotel.Contracts.Room.Requests;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +23,7 @@ public class EmployeeController : ControllerBase
 	}
 
 	[HttpGet("{employeeId}")]
-	public async Task<IActionResult> GetDetailsOrder(string employeeId)
+	public async Task<IActionResult> GetDetailsEmployee(string employeeId)
 	{
 		var query = new GetEmployeeDetailsQuery(employeeId);
 
