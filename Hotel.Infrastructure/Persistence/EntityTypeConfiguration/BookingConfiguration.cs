@@ -1,5 +1,4 @@
-﻿using Hotel.Domain.JobTitle;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using Hotel.Domain.Booking;
 

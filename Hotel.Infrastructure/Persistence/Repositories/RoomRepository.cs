@@ -56,12 +56,11 @@ public class RoomRepository : GenericRepository<RoomEntity>, IRoomRepository
 			.ToListAsync();
 	}
 
-    public async Task<List<RoomEntity>> FindRoomsByBookingStatus(BookingStatus status)
+    public async Task<List<RoomEntity>?> FindRoomsByBookingStatus(BookingStatus status)
     {
-        return await
-            ApplySpecification(new ConditionCategoryBookingSpecification())
-                .Where(room => room.Condition.Booking.Status == status)
-                .ToListAsync();
-    }
-
+		return await
+			ApplySpecification(new ConditionCategoryBookingClientsSpecification())
+				.Where(room => room.Condition.Booking.Status == status)
+				.ToListAsync();
+	}
 }

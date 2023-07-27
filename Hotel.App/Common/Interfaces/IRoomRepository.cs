@@ -1,5 +1,5 @@
-﻿using Hotel.Domain.Booking;
-using Hotel.Domain.Room;
+﻿using Hotel.Domain.Room;
+using static Hotel.Domain.Booking.BookingEntity;
 
 namespace Hotel.App.Common.Interfaces;
 
@@ -13,5 +13,5 @@ public interface IRoomRepository : IGenericRepository<RoomEntity>
 
 	Task<List<RoomEntity>?> FindRoomsByCountPersons(int quantityPersons);
 
-	Task<List<RoomEntity>?> FindRoomsByBookingStatus(BookingEntity.BookingStatus bookingStatus);
+	Task<List<RoomEntity>?> FindRoomsByBookingStatus(BookingStatus bookingStatus);
 }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Hotel.App.Common.Errors;
 using Hotel.App.Common.Interfaces;
-using Hotel.App.Room.Queries.GetRoomsByCountPersons;
 using Hotel.App.Room.Vm;
 using ErrorOr;
 using Hotel.Domain.Booking;
 using MediatR;
+using static Hotel.Domain.Booking.BookingEntity;
 
 namespace Hotel.App.Room.Queries.GetRoomsByBookingStatus
 {
@@ -30,9 +25,9 @@ namespace Hotel.App.Room.Queries.GetRoomsByBookingStatus
             GetRoomsByBookingStatusQuery request,
             CancellationToken cancellationToken)
         {
-            BookingEntity.BookingStatus bookingStatus = (BookingEntity.BookingStatus)Enum.Parse(typeof(BookingEntity.BookingStatus), request.bookingStatus);
+            BookingStatus bookingStatus = (BookingStatus)Enum.Parse(typeof(BookingStatus), request.bookingStatus);
 
-            var rooms = await _unitOfWork.Rooms.FindRoomsByBookingStatus(bookingStatus);
+			var rooms = await _unitOfWork.Rooms.FindRoomsByBookingStatus(bookingStatus);
             if (rooms is null)
             {
                 return Errors.Room.NotFound;
