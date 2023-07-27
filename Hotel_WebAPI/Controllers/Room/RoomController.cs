@@ -3,8 +3,8 @@ using Hotel.Contracts.Room.Get;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Hotel.App.Room.Queries.GetFreeRooms;
 using Hotel.App.Room.Queries.GetAllRooms;
+using Hotel.App.Room.Queries.GetRoomsByBookingStatus;
 using Hotel.App.Room.Queries.GetRoomsByCountSuite;
 using Hotel.App.Room.Queries.GetRoomsByCountPersons;
 
@@ -24,7 +24,7 @@ public class RoomController : ControllerBase
 	}
 
 	[HttpGet("{roomId}")]
-	public async Task<IActionResult> GetDetailsOrder(string roomId)
+	public async Task<IActionResult> GetDetailsRoom(string roomId)
 	{
 		var query = new GetRoomDetailsQuery(roomId);
 
@@ -75,10 +75,10 @@ public class RoomController : ControllerBase
         );
     }
 
-	[HttpGet("freeRooms")]
-	public async Task<IActionResult> GetFreeRooms()
+	[HttpGet("status/{bookingStatus}")]
+	public async Task<IActionResult> GetRoomsByBookingStatus(string bookingStatus)
 	{
-		var query = new GetFreeRoomsQuery();
+		var query = new GetRoomsByBookingStatusQuery(bookingStatus);
 
 		var roomsResult = await _mediator.Send(query);
 

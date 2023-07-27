@@ -39,13 +39,6 @@ public class RoomRepository : GenericRepository<RoomEntity>, IRoomRepository
 			.FirstOrDefaultAsync(cancellationToken);
 	}
 
-	public async Task<List<RoomEntity>?> FindFreeRooms()
-	{
-		return await 
-			 ApplySpecification(new ConditionCategoryBookingSpecification())
-			.Where(room => room.Condition.Booking.Status == BookingStatus.Free)
-			.ToListAsync();
-	}
 
 	public async Task<List<RoomEntity>?> FindRoomsByCountSuite(int quantitySuite)
 	{
@@ -61,5 +54,13 @@ public class RoomRepository : GenericRepository<RoomEntity>, IRoomRepository
 			 ApplySpecification(new ConditionCategoryBookingSpecification())
 			.Where(room => room.Category.QuantityPersons == quantityPersons)
 			.ToListAsync();
+	}
+
+    public async Task<List<RoomEntity>?> FindRoomsByBookingStatus(BookingStatus status)
+    {
+		return await
+			ApplySpecification(new ConditionCategoryBookingClientsSpecification())
+				.Where(room => room.Condition.Booking.Status == status)
+				.ToListAsync();
 	}
 }
