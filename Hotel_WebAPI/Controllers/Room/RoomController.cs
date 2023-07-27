@@ -24,7 +24,7 @@ public class RoomController : ControllerBase
 	}
 
 	[HttpGet("{roomId}")]
-	public async Task<IActionResult> GetDetailsOrder(string roomId)
+	public async Task<IActionResult> GetDetailsRoom(string roomId)
 	{
 		var query = new GetRoomDetailsQuery(roomId);
 
@@ -75,7 +75,7 @@ public class RoomController : ControllerBase
         );
     }
 
-	[HttpGet("{bookingStatus}")]
+	[HttpGet("status/{bookingStatus}")]
 	public async Task<IActionResult> GetRoomsByBookingStatus(string bookingStatus)
 	{
 		var query = new GetRoomsByBookingStatusQuery(bookingStatus);
